@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+// import { AmplifyProvider } from "@aws-amplify/ui-react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import '@aws-amplify/ui-react/styles.css'; // default theme
+import Amplify, { Auth, API, graphqlOperation } from "aws-amplify";
+import awsconfig from "./aws-exports";
+
+import HeaderMenu from "./components/HeaderMenu";
+import Home from "./pages/Home";
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HeaderMenu />
+      <Home />
+    </>
   );
 }
 
