@@ -12,6 +12,17 @@ import { useEffect, useState } from "react";
 import { TextField } from "@aws-amplify/ui-react";
 import Modal from "react-modal";
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
 export default function InstructorCard(props) {
   const [updating, setUpdating] = useState(false);
   const [name, setName] = useState(props.name);
@@ -30,6 +41,7 @@ export default function InstructorCard(props) {
       query: updateInstructor,
       variables: { input: { id: props.id, enabled: false } },
     });
+    setModalOpen(false);
   }
 
   useEffect(() => {
@@ -74,11 +86,17 @@ export default function InstructorCard(props) {
           )}
           <Modal
             isOpen={modalOpen}
-            // onAfterOpen={afterOpenModal}
             onRequestClose={() => setModalOpen(false)}
             contentLabel="Confirm Delete?"
+            style={customStyles}
           >
-            <Button>Confirm Delete Instructor</Button>
+            <Text>
+              Are you sure you want to delete {name} from the instructor list?
+            </Text>
+            <Text>You can reverse this later if you change your mind.</Text>
+            <Button onClick={handleDeleteClick}>
+              Confirm Delete Instructor
+            </Button>
             <Button onClick={() => setModalOpen(false)}>Cancel</Button>
           </Modal>
           <Button onClick={() => setModalOpen(true)}>Delete Instructor</Button>
