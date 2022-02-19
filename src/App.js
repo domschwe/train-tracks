@@ -4,27 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@aws-amplify/ui-react/styles.css"; // default theme
 import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HeaderMenu from "./components/HeaderMenu";
 import Home from "./pages/Home";
 import InstructorPage from "./pages/InstructorPage";
+import { ScrollView } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsconfig);
 
 function App() {
   return (
     <>
-      <HashRouter>
-        <div>
-          <HeaderMenu />
-          <hr />
+      <BrowserRouter>
+        <HeaderMenu />
+        <ScrollView padding="20px">
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/instructors" element={<InstructorPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/instructors" element={<InstructorPage />} />
           </Routes>
-        </div>
-      </HashRouter>
+        </ScrollView>
+      </BrowserRouter>
     </>
   );
 }
