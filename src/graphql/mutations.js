@@ -9,6 +9,8 @@ export const createInstructor = /* GraphQL */ `
     createInstructor(input: $input, condition: $condition) {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -32,6 +34,8 @@ export const updateInstructor = /* GraphQL */ `
     updateInstructor(input: $input, condition: $condition) {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -55,6 +59,8 @@ export const deleteInstructor = /* GraphQL */ `
     deleteInstructor(input: $input, condition: $condition) {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -81,6 +87,8 @@ export const createTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -114,6 +122,8 @@ export const updateTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -147,6 +157,8 @@ export const deleteTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -182,6 +194,8 @@ export const createComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
@@ -212,6 +226,8 @@ export const updateComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
@@ -242,6 +258,8 @@ export const deleteComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }

@@ -6,6 +6,8 @@ export const onCreateInstructor = /* GraphQL */ `
     onCreateInstructor {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -26,6 +28,8 @@ export const onUpdateInstructor = /* GraphQL */ `
     onUpdateInstructor {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -46,6 +50,8 @@ export const onDeleteInstructor = /* GraphQL */ `
     onDeleteInstructor {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -69,6 +75,8 @@ export const onCreateTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -99,6 +107,8 @@ export const onUpdateTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -129,6 +139,8 @@ export const onDeleteTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -161,6 +173,8 @@ export const onCreateComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
@@ -188,6 +202,8 @@ export const onUpdateComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
@@ -215,6 +231,8 @@ export const onDeleteComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }

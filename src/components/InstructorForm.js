@@ -5,8 +5,10 @@ import {
   Button,
   Flex,
   Divider,
-  Text,
 } from "@aws-amplify/ui-react";
+import { API } from "aws-amplify";
+import { listInstructors } from "../graphql/queries";
+import { createInstructor } from "../graphql/mutations";
 
 import InstructorCard from "./InstructorCard";
 
@@ -15,15 +17,38 @@ export default function TrainingForm() {
   const [bio, setBio] = useState("");
   const [instructors, setInstructors] = useState([]);
   const [disabled, setDisabled] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    fetchInstructors();
+  }, [saving]);
 
   useEffect(() => {
     setDisabled(name === "");
   }, [name]);
 
-  function onSubmitClick() {
-    setInstructors([...instructors, name]);
-    setBio("");
-    setName("");
+  async function fetchInstructors() {
+    try {
+      const instructorData = await API.graphql({ query: listInstructors });
+      setInstructors(instructorData.data.listInstructors.items);
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+  async function onSubmitClick() {
+    try {
+      setSaving(true);
+      if (!name | !bio) return;
+      await API.graphql({
+        query: createInstructor,
+        variables: { input: { name, bio, picture: "./missing.jpeg" } },
+      });
+      setBio("");
+      setName("");
+      setSaving(false);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -49,12 +74,9 @@ export default function TrainingForm() {
         Add Instructor
       </Button>
       <Divider border="5px solid blue" borderRadius="10px" />
+      {console.log(instructors)}
       {instructors.map((instructor) => {
-        return (
-          <>
-            <InstructorCard name={instructor} />
-          </>
-        );
+        return <InstructorCard {...instructor} />;
       })}
     </Flex>
   );

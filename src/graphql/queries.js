@@ -6,6 +6,8 @@ export const getInstructor = /* GraphQL */ `
     getInstructor(id: $id) {
       id
       name
+      picture
+      bio
       trainings {
         items {
           id
@@ -31,6 +33,8 @@ export const listInstructors = /* GraphQL */ `
       items {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -49,6 +53,8 @@ export const getTraining = /* GraphQL */ `
       instructor {
         id
         name
+        picture
+        bio
         trainings {
           nextToken
         }
@@ -84,6 +90,8 @@ export const listTrainings = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
@@ -108,6 +116,8 @@ export const getComment = /* GraphQL */ `
         instructor {
           id
           name
+          picture
+          bio
           createdAt
           updatedAt
         }
