@@ -8,10 +8,13 @@ export const onCreateInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -30,10 +33,13 @@ export const onUpdateInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -52,10 +58,13 @@ export const onDeleteInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -72,11 +81,14 @@ export const onCreateTraining = /* GraphQL */ `
     onCreateTraining {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -104,11 +116,14 @@ export const onUpdateTraining = /* GraphQL */ `
     onUpdateTraining {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -136,11 +151,14 @@ export const onDeleteTraining = /* GraphQL */ `
     onDeleteTraining {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -170,11 +188,14 @@ export const onCreateComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -199,11 +220,14 @@ export const onUpdateComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -228,11 +252,14 @@ export const onDeleteComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }

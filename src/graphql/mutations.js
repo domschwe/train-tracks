@@ -11,10 +11,13 @@ export const createInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -36,10 +39,13 @@ export const updateInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -61,10 +67,13 @@ export const deleteInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -84,11 +93,14 @@ export const createTraining = /* GraphQL */ `
     createTraining(input: $input, condition: $condition) {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -119,11 +131,14 @@ export const updateTraining = /* GraphQL */ `
     updateTraining(input: $input, condition: $condition) {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -154,11 +169,14 @@ export const deleteTraining = /* GraphQL */ `
     deleteTraining(input: $input, condition: $condition) {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -191,11 +209,14 @@ export const createComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -223,11 +244,14 @@ export const updateComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -255,11 +279,14 @@ export const deleteComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }

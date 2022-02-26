@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Flex,
-} from "@aws-amplify/ui-react";
+import { Flex } from "@aws-amplify/ui-react";
 import { API } from "aws-amplify";
 import { listInstructors } from "../graphql/queries";
 
@@ -25,7 +23,6 @@ export default function InstructorList() {
 
   return (
     <Flex direction="column" gap="1.5rem">
-      {console.log(instructors)}
       {instructors.map((instructor) => {
         return <InstructorCard {...instructor} />;
       })}

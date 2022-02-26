@@ -8,10 +8,13 @@ export const getInstructor = /* GraphQL */ `
       name
       picture
       bio
+      enabled
       trainings {
         items {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId
@@ -35,6 +38,7 @@ export const listInstructors = /* GraphQL */ `
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -50,11 +54,14 @@ export const getTraining = /* GraphQL */ `
     getTraining(id: $id) {
       id
       title
+      description
+      enabled
       instructor {
         id
         name
         picture
         bio
+        enabled
         trainings {
           nextToken
         }
@@ -87,11 +94,14 @@ export const listTrainings = /* GraphQL */ `
       items {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -113,11 +123,14 @@ export const getComment = /* GraphQL */ `
       training {
         id
         title
+        description
+        enabled
         instructor {
           id
           name
           picture
           bio
+          enabled
           createdAt
           updatedAt
         }
@@ -147,6 +160,8 @@ export const listComments = /* GraphQL */ `
         training {
           id
           title
+          description
+          enabled
           createdAt
           updatedAt
           instructorTrainingsId

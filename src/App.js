@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HeaderMenu from "./components/HeaderMenu";
 import Home from "./pages/Home";
 import InstructorPage from "./pages/InstructorPage";
+import TrainingPage from "./pages/TrainingPage";
 import { ScrollView } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsconfig);
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/instructors" element={<InstructorPage />} />
+            <Route path="/trainings" element={<TrainingPage />} />
           </Routes>
         </ScrollView>
       </BrowserRouter>

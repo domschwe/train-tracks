@@ -6,8 +6,9 @@ import { Flex } from "@aws-amplify/ui-react";
 export default function HeaderMenu() {
   return (
     <Flex direction="row" gap="1.5rem">
-      <h1>Train-Tracks</h1>
-      <NavLink to="/">All Trainings</NavLink>
+      <h1>NchikotApp</h1>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/trainings">All Trainings</NavLink>
       <NavLink to="/instructors">Instructors</NavLink>
     </Flex>
   );

@@ -10,13 +10,17 @@ export default function InstructorForm() {
   const [saving, setSaving] = useState(false);
   const [visible, setVisible] = useState(false);
 
+  // Make sure name is entered
   useEffect(() => {
     setDisabled(name === "");
   }, [name]);
 
+  // Make form visible on click
   function onAddInstructorClick() {
     visible ? setVisible(false) : setVisible(true);
   }
+
+  // Create new DB entry
   async function onSubmitClick() {
     try {
       setSaving(true);
