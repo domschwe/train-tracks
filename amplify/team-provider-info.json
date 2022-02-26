@@ -10,6 +10,11 @@
       "StackName": "amplify-traintracks-dev-145600",
       "StackId": "arn:aws:cloudformation:us-east-1:518583762034:stack/amplify-traintracks-dev-145600/cf591be0-8c3d-11ec-9c52-12ae3af2862f",
       "AmplifyAppId": "d2yyym40rf6wcp"
+    },
+    "categories": {
+      "auth": {
+        "traintracks0778a35e": {}
+      }
     }
   }
 }
