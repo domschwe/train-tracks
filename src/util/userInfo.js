@@ -1,7 +1,6 @@
-const [user, setUser] = useState(null);
-const [userGroups, setUserGroups] = useState(null);
+import Amplify, { Hub, Auth } from "aws-amplify";
 
-useEffect(() => {
+export default function userInfo(setUser, setUserGroups) {
   Hub.listen("auth", ({ payload: { event, data } }) => {
     switch (event) {
       case "signIn":
@@ -27,7 +26,7 @@ useEffect(() => {
       setUserGroups(null);
     }
   });
-}, []);
+}
 
 function getUser() {
   return Auth.currentAuthenticatedUser()
