@@ -1,35 +1,12 @@
-import Amplify, { Hub, Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
-export default function userInfo(setUser, setUserGroups) {
-  Hub.listen("auth", ({ payload: { event, data } }) => {
-    switch (event) {
-      case "signIn":
-        getUser().then((userData) => setUser(userData));
-        break;
-      case "signOut":
-        setUser(null);
-        setUserGroups(null);
-        break;
-      case "signIn_failure":
-        console.log("Sign in failure", data);
-        break;
-    }
-  });
+export default async function userInfo() {
+  const user = await Auth.currentAuthenticatedUser();
 
-  getUser().then((userData) => {
-    setUser(userData);
-    if (userData) {
-      setUserGroups(
-        userData.signInUserSession.accessToken.payload["cognito:groups"]
-      );
-    } else {
-      setUserGroups(null);
-    }
-  });
-}
+  const groups = user.signInUserSession.accessToken.payload["cognito:groups"];
 
-function getUser() {
-  return Auth.currentAuthenticatedUser()
-    .then((userData) => userData)
-    .catch(() => console.log("Not signed in"));
+  return {
+    user,
+    groups,
+  };
 }

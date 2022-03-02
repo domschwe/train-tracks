@@ -15,7 +15,7 @@ import { ScrollView, withAuthenticator } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsconfig);
 
-function App() {
+function App({ signOut }) {
   const [user, setUser] = useState(null);
   const [userGroups, setUserGroups] = useState(null);
 
@@ -47,20 +47,23 @@ function App() {
     });
   }, []);
 
-  function getUser() {
-    return Auth.currentAuthenticatedUser()
+  async function getUser() {
+    return await Auth.currentAuthenticatedUser()
       .then((userData) => userData)
       .catch(() => console.log("Not signed in"));
   }
   return (
     <>
       <BrowserRouter>
-        <HeaderMenu user={user} />
+        <HeaderMenu user={user} signOut={signOut} />
         <ScrollView padding="20px">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/instructors" element={<InstructorPage />} />
-            <Route path="/trainings" element={<TrainingPage />} />
+            <Route
+              path="/trainings"
+              element={<TrainingPage userGroups={userGroups} />}
+            />
           </Routes>
         </ScrollView>
       </BrowserRouter>
