@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { AmplifyProvider } from "@aws-amplify/ui-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@aws-amplify/ui-react/styles.css"; // default theme
@@ -14,6 +14,7 @@ import TrainingPage from "./pages/TrainingPage";
 import { ScrollView, withAuthenticator } from "@aws-amplify/ui-react";
 import ProfilePage from "./pages/ProfilePage";
 
+export const UserContext = React.createContext();
 Amplify.configure(awsconfig);
 
 function App({ signOut }) {
@@ -59,29 +60,26 @@ function App({ signOut }) {
     <>
       <BrowserRouter>
         {/* <div style={padding: "5%"}> */}
-        
-        <ScrollView padding="7%">
-        <HeaderMenu user={user} signOut={signOut} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/instructors"
-              element={<InstructorPage userGroups={userGroups} />}
+        <UserContext.Provider value={{user, userGroups}}>
+          <ScrollView padding="7%">
+            <HeaderMenu user={user} signOut={signOut} />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/instructors"
+                element={<InstructorPage userGroups={userGroups} />}
               />
-            <Route
-              path="/trainings"
-              element={<TrainingPage userGroups={userGroups} />}
+              <Route
+                path="/trainings"
+                element={<TrainingPage userGroups={userGroups} />}
               />
-            <Route
-              path="/profile"
-              element={<ProfilePage user={user} />}
-              />
-          </Routes>
-        </ScrollView>
-              {/* </div> */}
+              <Route path="/profile" element={<ProfilePage user={user} />} />
+            </Routes>
+          </ScrollView>
+          {/* </div> */}
+        </UserContext.Provider>
       </BrowserRouter>
     </>
   );
 }
-
 export default withAuthenticator(App);

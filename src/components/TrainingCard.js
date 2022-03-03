@@ -1,9 +1,10 @@
 import { Card, Heading, Flex, Text, Button } from "@aws-amplify/ui-react";
 import { updateTraining } from "../graphql/mutations";
 import { API } from "aws-amplify";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { TextField } from "@aws-amplify/ui-react";
 import Modal from "react-modal";
+import { UserContext } from "../App";
 
 const customStyles = {
   content: {
@@ -22,6 +23,7 @@ export default function TrainingCard(props) {
   const [description, setDescription] = useState(props.description);
   const [modalOpen, setModalOpen] = useState(false);
   const [enabled, setEnabled] = useState(props.enabled);
+  const { userGroups } = useContext(UserContext);
 
   async function handleDeleteClick() {
     await API.graphql({
@@ -48,6 +50,7 @@ export default function TrainingCard(props) {
 
   return (
     <Card variation="elevated">
+      {console.log(userGroups)}
       <Flex direction="row" alignItems="flex-start">
         <Flex direction="column" alignItems="flex-start" width="75%">
           {!updating && (
