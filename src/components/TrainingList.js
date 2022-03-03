@@ -13,7 +13,7 @@ export default function TrainingList() {
     fetchTrainings();
   });
 
-  async function fetchTrainings() {
+  async function fetchTrainings(props) {
     try {
       const trainingData = await API.graphql({ query: listTrainings });
       setTrainings(trainingData.data.listTrainings.items);

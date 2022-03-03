@@ -12,8 +12,9 @@ export default function TrainingPage(props) {
           <Divider border="5px solid blue" borderRadius="10px" />
         </>
       )}
-      <TrainingList />
-      {console.log({ props })}
+      <TrainingList
+        admin={props.userGroups && props.userGroups.includes("admin")}
+      />
     </>
   );
 }

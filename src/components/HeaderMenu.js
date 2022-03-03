@@ -13,7 +13,7 @@ export default function HeaderMenu(props) {
       <NavLink to="/instructors">Instructors</NavLink>
       {props.user !== null && (
         <>
-          <NavLink to="/">Manage Profile</NavLink>
+          <NavLink to="/profile">Manage Profile</NavLink>
           <Button onClick={props.signOut}>Sign out</Button>
           </>
       )}

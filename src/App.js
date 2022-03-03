@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import InstructorPage from "./pages/InstructorPage";
 import TrainingPage from "./pages/TrainingPage";
 import { ScrollView, withAuthenticator } from "@aws-amplify/ui-react";
+import ProfilePage from "./pages/ProfilePage";
 
 Amplify.configure(awsconfig);
 
@@ -31,6 +32,8 @@ function App({ signOut }) {
           break;
         case "signIn_failure":
           console.log("Sign in failure", data);
+          break;
+        default:
           break;
       }
     });
@@ -55,17 +58,27 @@ function App({ signOut }) {
   return (
     <>
       <BrowserRouter>
+        {/* <div style={padding: "5%"}> */}
+        
+        <ScrollView padding="7%">
         <HeaderMenu user={user} signOut={signOut} />
-        <ScrollView padding="20px">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/instructors" element={<InstructorPage />} />
+            <Route
+              path="/instructors"
+              element={<InstructorPage userGroups={userGroups} />}
+              />
             <Route
               path="/trainings"
               element={<TrainingPage userGroups={userGroups} />}
-            />
+              />
+            <Route
+              path="/profile"
+              element={<ProfilePage user={user} />}
+              />
           </Routes>
         </ScrollView>
+              {/* </div> */}
       </BrowserRouter>
     </>
   );
