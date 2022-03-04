@@ -20,6 +20,7 @@ export const createInstructor = /* GraphQL */ `
           startDate
           endDate
           enabled
+          attendees
           createdAt
           updatedAt
           instructorTrainingsId
@@ -50,6 +51,7 @@ export const updateInstructor = /* GraphQL */ `
           startDate
           endDate
           enabled
+          attendees
           createdAt
           updatedAt
           instructorTrainingsId
@@ -80,6 +82,7 @@ export const deleteInstructor = /* GraphQL */ `
           startDate
           endDate
           enabled
+          attendees
           createdAt
           updatedAt
           instructorTrainingsId
@@ -125,6 +128,7 @@ export const createTraining = /* GraphQL */ `
         }
         nextToken
       }
+      attendees
       createdAt
       updatedAt
       instructorTrainingsId
@@ -165,6 +169,7 @@ export const updateTraining = /* GraphQL */ `
         }
         nextToken
       }
+      attendees
       createdAt
       updatedAt
       instructorTrainingsId
@@ -205,6 +210,7 @@ export const deleteTraining = /* GraphQL */ `
         }
         nextToken
       }
+      attendees
       createdAt
       updatedAt
       instructorTrainingsId
@@ -237,6 +243,7 @@ export const createComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        attendees
         createdAt
         updatedAt
         instructorTrainingsId
@@ -274,6 +281,7 @@ export const updateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        attendees
         createdAt
         updatedAt
         instructorTrainingsId
@@ -311,6 +319,7 @@ export const deleteComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        attendees
         createdAt
         updatedAt
         instructorTrainingsId

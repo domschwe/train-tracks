@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API, Auth } from "aws-amplify";
+import { API, Auth, Hub } from "aws-amplify";
 import { Text, TextField, Badge, Button, Loader } from "@aws-amplify/ui-react";
 import { updateTraining } from "../graphql/mutations";
 
@@ -12,7 +12,7 @@ export default function ProfileForm(props) {
   const [role, setRole] = useState("");
   const [complete, setComplete] = useState(false);
   const [saving, setSaving] = useState(false);
-  const { registration } = props;
+  const { registration, registered, attendees } = props;
 
   useEffect(() => {
     getUserInfo();
@@ -47,15 +47,48 @@ export default function ProfileForm(props) {
       "custom:role": role,
     });
 
-    if (registration)
-    {
+    if (registration && !registered) {
+      const newAttendees = [attendees, user.username];
       await API.graphql({
         query: updateTraining,
-        variables: {input: {id: props.id = "e8956193-a12f-4954-bb9b-97d3013bf89d"}}
-      })
+        variables: {
+          input: {
+            id: "e8956193-a12f-4954-bb9b-97d3013bf89d",
+            attendees: newAttendees,
+          },
+        },
+      });
+
+      Hub.dispatch("RegistrationEvents", {
+        data: {},
+        event: "modified",
+        message: "A user was registered",
+      });
     }
     setSaving(false);
     console.log(user);
+  }
+
+  async function handleRemoveClick() {
+    const user = await Auth.currentAuthenticatedUser();
+    setSaving(true);
+    const newAttendees = attendees.filter((item) => item !== user.username);
+    await API.graphql({
+      query: updateTraining,
+      variables: {
+        input: {
+          id: "e8956193-a12f-4954-bb9b-97d3013bf89d",
+          attendees: newAttendees,
+        },
+      },
+    });
+    Hub.dispatch("RegistrationEvents", {
+      data: {},
+      event: "modified",
+      message: "A user was removed",
+    });
+
+    setSaving(false);
   }
 
   return (
@@ -100,9 +133,14 @@ export default function ProfileForm(props) {
       {complete && <Badge variation="success">Profile Complete</Badge>}
       {!complete && <Badge variation="error">Profile Not Complete</Badge>}
       {!saving && (
-        <Button onClick={updateUser} disabled={!complete}>
-          Save{registration && " and Register"}
-        </Button>
+        <>
+          <Button onClick={updateUser} disabled={!complete}>
+            Save{registration && !registered && " and Register"}
+          </Button>
+          {registered && (
+            <Button onClick={handleRemoveClick}>Remove Registration</Button>
+          )}
+        </>
       )}
       {saving && (
         <Button disabled={true}>

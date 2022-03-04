@@ -17,6 +17,7 @@ export const getInstructor = /* GraphQL */ `
           startDate
           endDate
           enabled
+          attendees
           createdAt
           updatedAt
           instructorTrainingsId
@@ -82,6 +83,7 @@ export const getTraining = /* GraphQL */ `
         }
         nextToken
       }
+      attendees
       createdAt
       updatedAt
       instructorTrainingsId
@@ -114,6 +116,7 @@ export const listTrainings = /* GraphQL */ `
         comments {
           nextToken
         }
+        attendees
         createdAt
         updatedAt
         instructorTrainingsId
@@ -145,6 +148,7 @@ export const getComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        attendees
         createdAt
         updatedAt
         instructorTrainingsId
@@ -172,6 +176,7 @@ export const listComments = /* GraphQL */ `
           startDate
           endDate
           enabled
+          attendees
           createdAt
           updatedAt
           instructorTrainingsId
