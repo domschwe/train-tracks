@@ -20,6 +20,7 @@ type Training @model {
   enabled: Boolean
   instructor: Instructor @belongsTo
   comments: [Comment] @hasMany
+  attendees: [String]
 }
 
 type Comment @model {

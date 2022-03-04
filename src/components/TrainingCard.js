@@ -1,6 +1,6 @@
 import { Card, Heading, Flex, Text, Button } from "@aws-amplify/ui-react";
 import { updateTraining } from "../graphql/mutations";
-import { API } from "aws-amplify";
+import { API, Hub } from "aws-amplify";
 import { useEffect, useState, useContext } from "react";
 import { TextField } from "@aws-amplify/ui-react";
 import Modal from "react-modal";
@@ -34,8 +34,14 @@ export default function TrainingCard(props) {
     });
     setEnabled(false);
     setModalOpen(false);
+          Hub.dispatch("TrainingEvents", {
+            data: {},
+            event: "modified",
+            message: "A training was removed",
+          });
   }
-  async function handleRestoreClick() {
+  async function handleRestoreClick()
+  {
     await API.graphql({
       query: updateTraining,
       variables: { input: { id: props.id, enabled: true } },

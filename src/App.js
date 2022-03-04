@@ -60,9 +60,10 @@ function App({ signOut }) {
     <>
       <BrowserRouter>
         {/* <div style={padding: "5%"}> */}
-        <UserContext.Provider value={{user, userGroups}}>
+        <UserContext.Provider value={{ user, userGroups }}>
           <ScrollView padding="7%">
             <HeaderMenu user={user} signOut={signOut} />
+            <br />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route

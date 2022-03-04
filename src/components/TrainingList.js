@@ -15,7 +15,7 @@ export default function TrainingList() {
 
     Hub.listen("TrainingEvents", ({ payload: { event, data } }) => {
       switch (event) {
-        case "added":
+        case "modified":
           fetchTrainings();
           break;
         default:

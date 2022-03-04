@@ -66,7 +66,7 @@ export default function TrainingForm() {
 
       Hub.dispatch("TrainingEvents", {
         data: {},
-        event: "added",
+        event: "modified",
         message: "A training was added",
       });
     } catch (err) {
