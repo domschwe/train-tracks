@@ -17,6 +17,8 @@ export const createInstructor = /* GraphQL */ `
           id
           title
           description
+          startDate
+          endDate
           enabled
           createdAt
           updatedAt
@@ -45,6 +47,8 @@ export const updateInstructor = /* GraphQL */ `
           id
           title
           description
+          startDate
+          endDate
           enabled
           createdAt
           updatedAt
@@ -73,6 +77,8 @@ export const deleteInstructor = /* GraphQL */ `
           id
           title
           description
+          startDate
+          endDate
           enabled
           createdAt
           updatedAt
@@ -94,6 +100,8 @@ export const createTraining = /* GraphQL */ `
       id
       title
       description
+      startDate
+      endDate
       enabled
       instructor {
         id
@@ -132,6 +140,8 @@ export const updateTraining = /* GraphQL */ `
       id
       title
       description
+      startDate
+      endDate
       enabled
       instructor {
         id
@@ -170,6 +180,8 @@ export const deleteTraining = /* GraphQL */ `
       id
       title
       description
+      startDate
+      endDate
       enabled
       instructor {
         id
@@ -210,6 +222,8 @@ export const createComment = /* GraphQL */ `
         id
         title
         description
+        startDate
+        endDate
         enabled
         instructor {
           id
@@ -245,6 +259,8 @@ export const updateComment = /* GraphQL */ `
         id
         title
         description
+        startDate
+        endDate
         enabled
         instructor {
           id
@@ -280,6 +296,8 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         description
+        startDate
+        endDate
         enabled
         instructor {
           id

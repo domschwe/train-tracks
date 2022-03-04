@@ -25,6 +25,8 @@ export default function TrainingCard(props) {
   const [enabled, setEnabled] = useState(props.enabled);
   const { userGroups } = useContext(UserContext);
 
+  const admin = userGroups.includes("admin")
+
   async function handleDeleteClick() {
     await API.graphql({
       query: updateTraining,
@@ -59,26 +61,28 @@ export default function TrainingCard(props) {
               <Text as="span">{description}</Text>
             </>
           )}
-          {updating && (
-            <>
+
+            {updating && (
+              <>
               <TextField
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               ></TextField>
               <TextField
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                isMultiline={true}
-                resize="vertical"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              isMultiline={true}
+              resize="vertical"
               ></TextField>
-            </>
-          )}
+              </>
+              )}
         </Flex>
+        
         <Modal
-          isOpen={modalOpen}
-          onRequestClose={() => setModalOpen(false)}
-          contentLabel="Confirm Delete?"
-          style={customStyles}
+        isOpen={modalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        contentLabel="Confirm Delete?"
+        style={customStyles}
         >
           <Text>
             Are you sure you want to delete {title} from the training list?
@@ -89,7 +93,7 @@ export default function TrainingCard(props) {
           <Button onClick={() => setModalOpen(false)}>Cancel</Button>
         </Modal>
         <Flex direction="column" alignItems="flex-start" width="25%">
-          {!updating && (
+          {!updating && admin && (
             <>
               <Button onClick={() => setUpdating(true)}>Update Details</Button>
             </>
@@ -101,12 +105,12 @@ export default function TrainingCard(props) {
               </Button>
             </>
           )}
-          {enabled && (
+          {enabled && admin && (
             <Button onClick={() => setModalOpen(true)}>Delete Training</Button>
-          )}
-          {!enabled && (
+            )}
+          {!enabled && admin && (
             <Button onClick={handleRestoreClick}>Restore Training</Button>
-          )}
+            )}
         </Flex>
       </Flex>
     </Card>

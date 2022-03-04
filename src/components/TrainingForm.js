@@ -6,7 +6,7 @@ import {
   Flex,
   SelectField,
 } from "@aws-amplify/ui-react";
-import { API } from "aws-amplify";
+import { API, Hub } from "aws-amplify";
 import { listInstructors } from "../graphql/queries";
 import { createTraining } from "../graphql/mutations";
 
@@ -21,8 +21,8 @@ export default function TrainingForm() {
 
   // Make sure a title is entered
   useEffect(() => {
-    setDisabled(title === "");
-  }, [title]);
+    setDisabled(title === "" | selectedInstructor === "");
+  }, [title, selectedInstructor]);
 
   // Make form visible on click
   function onAddTrainingClick() {
@@ -32,7 +32,7 @@ export default function TrainingForm() {
   // Get instructor list
   useEffect(() => {
     fetchInstructors();
-  });
+  }, [visible]);
 
   async function fetchInstructors() {
     try {
@@ -54,6 +54,7 @@ export default function TrainingForm() {
             title,
             description,
             instructorTrainingsId: selectedInstructor,
+            enabled: true,
           },
         },
       });
@@ -62,6 +63,12 @@ export default function TrainingForm() {
       setDescription("");
       setSelectedInstructor("");
       setSaving(false);
+
+      Hub.dispatch("TrainingEvents", {
+        data: {},
+        event: "added",
+        message: "A training was added",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -79,27 +86,30 @@ export default function TrainingForm() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <TextField
-            label="Description"
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            isMultiline={true}
-            resize="vertical"
-            rows={3}
-          />
-          <SelectField
-            label="Instructor"
-            labelHidden={true}
-            placeholder="Instructor"
-            value={selectedInstructor}
-            onChange={(e) => setSelectedInstructor(e.target.value)}
-          >
+            <SelectField
+            label="Owner*"
+              labelHidden={false}
+              placeholder="Owner"
+              value={selectedInstructor}
+              onChange={(e) => setSelectedInstructor(e.target.value)}
+            >
             {instructors.map((instructor) => {
-              console.log(instructor);
-              return <option value={instructor.id}>{instructor.name}</option>;
+              return (
+                <option key={instructor.id} value={instructor.id}>
+                  {instructor.name}
+                </option>
+              );
             })}
           </SelectField>
+            <TextField
+              label="Description"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              isMultiline={true}
+              resize="vertical"
+              rows={3}
+            />
           <Button
             variation="primary"
             onClick={onSubmitClick}

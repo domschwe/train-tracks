@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Flex, Button } from "@aws-amplify/ui-react";
-import { API } from "aws-amplify";
+import { Flex, Button, Heading } from "@aws-amplify/ui-react";
+import { API, Hub } from "aws-amplify";
 import { listTrainings } from "../graphql/queries";
 import { UserContext } from "../App";
 import TrainingCard from "./TrainingCard";
@@ -12,7 +12,17 @@ export default function TrainingList() {
 
   useEffect(() => {
     fetchTrainings();
-  }, [trainings]);
+
+    Hub.listen("TrainingEvents", ({ payload: { event, data } }) => {
+      switch (event) {
+        case "added":
+          fetchTrainings();
+          break;
+        default:
+          break;
+      }
+    });
+  }, []);
 
   async function fetchTrainings(props) {
     try {
@@ -25,10 +35,11 @@ export default function TrainingList() {
 
   return (
     <Flex direction="column" gap="1.5rem">
+      <Heading level={2}>All Events</Heading>
       {trainings
         .filter((training) => training.enabled)
         .map((training) => {
-          return <TrainingCard {...training} />;
+          return <TrainingCard key={training.id} {...training} />;
         })}
       {userGroups && userGroups.includes("admin") && (
         <>
@@ -39,7 +50,7 @@ export default function TrainingList() {
             trainings
               .filter((training) => !training.enabled)
               .map((training) => {
-                return <TrainingCard {...training} />;
+                return <TrainingCard key={training.id} {...training} />;
               })}
         </>
       )}

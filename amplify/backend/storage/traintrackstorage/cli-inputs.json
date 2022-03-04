@@ -1,0 +1,13 @@
+{
+  "resourceName": "traintrackstorage",
+  "policyUUID": "3cb7d293",
+  "bucketName": "traintrackscac024516bc945688200af6eefa87ec2",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

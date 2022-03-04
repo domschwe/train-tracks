@@ -14,6 +14,8 @@ export const getInstructor = /* GraphQL */ `
           id
           title
           description
+          startDate
+          endDate
           enabled
           createdAt
           updatedAt
@@ -55,6 +57,8 @@ export const getTraining = /* GraphQL */ `
       id
       title
       description
+      startDate
+      endDate
       enabled
       instructor {
         id
@@ -95,6 +99,8 @@ export const listTrainings = /* GraphQL */ `
         id
         title
         description
+        startDate
+        endDate
         enabled
         instructor {
           id
@@ -124,6 +130,8 @@ export const getComment = /* GraphQL */ `
         id
         title
         description
+        startDate
+        endDate
         enabled
         instructor {
           id
@@ -161,6 +169,8 @@ export const listComments = /* GraphQL */ `
           id
           title
           description
+          startDate
+          endDate
           enabled
           createdAt
           updatedAt
