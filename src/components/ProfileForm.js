@@ -48,7 +48,7 @@ export default function ProfileForm(props) {
     });
 
     if (registration && !registered) {
-      const newAttendees = [attendees, user.username];
+      const newAttendees = [...attendees, user.username];
       await API.graphql({
         query: updateTraining,
         variables: {
@@ -59,6 +59,7 @@ export default function ProfileForm(props) {
         },
       });
 
+      console.log(newAttendees)
       Hub.dispatch("RegistrationEvents", {
         data: {},
         event: "modified",
@@ -95,7 +96,7 @@ export default function ProfileForm(props) {
     <>
       <Text>Please complete the form below:</Text>
       <TextField
-        label="Email"
+        label="Email (Cannot be Modified)"
         placeholder="email"
         value={email}
         isReadOnly={true}
